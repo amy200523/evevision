@@ -104,7 +104,7 @@ void OverlayConnector::start()
 
 void OverlayConnector::connect()
 {
-    std::string characterName = std::regex_replace(session::windowTitle(), std::regex("EVE - "), "");
+    std::string characterName = std::regex_replace(std::regex_replace(session::windowTitle(), std::regex("EVE - "), ""), std::regex("星战前夜：晨曦 - "), "");
     std::string correctedCharacterName = std::regex_replace(characterName, std::regex(" "), "-");
     std::transform(correctedCharacterName.begin(), correctedCharacterName.end(), correctedCharacterName.begin(),
         [](unsigned char c) { return std::tolower(c); });

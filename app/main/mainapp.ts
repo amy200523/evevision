@@ -170,11 +170,25 @@ export default class MainApp {
     const topWindows = Overlay.getTopWindows();
     topWindows.forEach((window: any) => {
       if (
+          window.exeName.endsWith("exefile.exe") && !window.title.startsWith("EVE - ")
+          && !window.title.startsWith("MSCTFIME") && !window.title.startsWith("Default IME")
+          && !window.title.startsWith("Temp Window") && !window.title.startsWith("HintWnd")
+          && !window.title.startsWith("星战前夜：晨曦 - ")
+      ) {
+        let codes = []
+        for (var i = 0; i < window.title.length; i++){
+          codes.push(window.title.charCodeAt(i));
+        }
+        log.error("Different game title found", window.title, window.title, codes.join(" "))
+      }
+    })
+    topWindows.forEach((window: any) => {
+      if (
         window.exeName.endsWith("exefile.exe") &&
-        window.title.startsWith("EVE - ") &&
+          (window.title.startsWith("EVE - ") || window.title.startsWith("星战前夜：晨曦 - ")) &&
         !this.injectedPids.has(window.processId)
       ) {
-        const characterName = window.title.replace("EVE - ", "");
+        const characterName = window.title.replace("EVE - ", "").replace("星战前夜：晨曦 - ", "");
         if (this.eveInstances.has(characterName)) {
           this.eveInstances.get(characterName)!.stop();
           this.eveInstances.delete(characterName);

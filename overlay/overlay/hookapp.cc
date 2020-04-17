@@ -233,7 +233,7 @@ bool HookApp::findGameWindow()
             char windowTitle[256];
             GetWindowTextA(injectWindow, windowTitle, sizeof(windowTitle));
 
-            if (((std::string)windowTitle).rfind("EVE - ") == 0) {
+            if (((std::string)windowTitle).rfind("EVE - ") == 0 || ((std::string)windowTitle).rfind("星战前夜：晨曦 - ") == 0) {
                 session::setWindowTitle(windowTitle);
                 __trace__ << "setGraphicsWindow by injectWindow: " << injectWindow;
                 session::setGraphicsWindow(injectWindow);
@@ -260,7 +260,7 @@ bool HookApp::findGameWindow()
                 char windowTitle[256];
                 GetWindowTextA(param.window, windowTitle, sizeof(windowTitle));
 
-                if (((std::string)windowTitle).rfind("EVE - ") == 0) {
+                if (((std::string)windowTitle).rfind("EVE - ") == 0 || ((std::string)windowTitle).rfind("星战前夜：晨曦 - ") == 0) {
                     session::setWindowTitle(windowTitle);
                     __trace__ << "setGraphicsWindow by enum: " << param.window;
                     // bruh its gettin set right here wut
